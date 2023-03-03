@@ -1,18 +1,21 @@
 import './App.css';
 import Task from './Task';
 import TaskForm from './TaskForm';
+import { useState } from 'react';
 
 function App() {
   const [tasks, setTasks] = useState([]);
   function addTask(name) {
      setTasks(prev => {
         return [...prev, {name:name, done:false}];
-     })
+     });
   }
   return (
     <main>
       <TaskForm onAdd={addTask} />
-      <Task />
+      {tasks.map(task => (
+         <Task {...task} />
+      ))}
     </main>
   );
 }
